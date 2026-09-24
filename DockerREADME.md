@@ -4,7 +4,17 @@ On pull requests, GitHub Actions runs the unit tests. On pushes to `main`, it al
 
 ## VPS setup
 
-Create a private deployment directory, for example `/opt/evc-charger-status`, owned by the deploy user. Put `config.json` with the charger list and `.env` with `EVC_API_KEY=...` there. Optional `.env` entries are `EVC_DEVICE_ID`, `EVC_BASE_URL`, and `EVC_PORT` (default 8000). These files are ignored by Git and stay on the VPS. The workflow uploads `docker-compose.yml` itself.
+Create a private deployment directory, for example `/opt/evc-charger-status`, owned by the deploy user. Put `.env` with `EVC_API_KEY=...` there. The workflow uploads the tracked `config.json` with the charger list on each deployment. Optional `.env` entries are `EVC_DEVICE_ID`, `EVC_BASE_URL`, and `EVC_PORT` (default 8000). The private `.env` is ignored by Git and stays on the VPS. The workflow also uploads `docker-compose.yml`.
+
+Before the first deploy, create the private environment file on the VPS:
+
+```bash
+cd /opt/evc-charger-status
+install -m 600 /dev/null .env
+# Edit .env and add EVC_API_KEY=your_actual_key
+```
+
+Use your actual `DEPLOY_PATH` instead of the example path. The workflow stops with a clear error if this file or the deployment directory is missing.
 
 The API binds to `127.0.0.1:EVC_PORT` on the VPS, for use behind an existing reverse proxy. SQLite history is stored in the named Docker volume `evc-status-data` and survives container replacement. Keep one deployment of this app per VPS unless you give each stack a separate Compose project name and port.
 
