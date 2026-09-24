@@ -20,5 +20,6 @@ requests==2.34.2
 starlette==1.6.0
 typing-inspection==0.4.4
 typing_extensions==4.16.0
+tzdata==2026.4
 urllib3==2.8.0
 uvicorn==0.53.0
