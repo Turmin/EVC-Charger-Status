@@ -16,6 +16,7 @@ Start the server from the project directory:
 
 ## Endpoints
 
+- `GET /` returns JSON with the service status, configured charging point count, and available endpoints.
 - `GET /health` returns the service status and configured charging point count.
 - `GET /chargers` returns each configured point with its latest EVSE status, `retrievedAt`, `since`, and any refresh error. A refresh error leaves the last known status available; check `retrievedAt` before using it.
 - `GET /chargers/{qr_code}/history?limit=100` returns status periods from SQLite, newest first. `since` marks the first observation of a status and `until` marks the first observation of the next status. The current period has `until: null`. The limit can be 1 to 1000. This endpoint does not call EVC-net.

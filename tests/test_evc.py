@@ -7,6 +7,17 @@ import app
 
 
 class ChargerStatusTest(unittest.TestCase):
+    def test_home_lists_status_and_endpoints(self):
+        with patch.object(app, "config", {"chargers": [{"qr_code": "A"}]}):
+            response = app.home()
+
+        self.assertEqual(response["status"], "ok")
+        self.assertEqual(response["configuredChargers"], 1)
+        self.assertIn({"method": "GET", "path": "/health", "description": "API health"},
+                      response["endpoints"])
+        self.assertIn({"method": "POST", "path": "/reload",
+                       "description": "Reload configuration"}, response["endpoints"])
+
     def test_status_since_survives_same_status_and_changes_on_transition(self):
         with tempfile.TemporaryDirectory() as directory, patch.object(
             app, "DB_PATH", Path(directory) / "status.sqlite3"

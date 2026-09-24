@@ -178,6 +178,22 @@ def poll():
                 errors[code] = type(exc).__name__
 
 
+@app.get("/")
+def home():
+    return {
+        "status": "ok",
+        "configuredChargers": len(config["chargers"]),
+        "endpoints": [
+            {"method": "GET", "path": "/", "description": "API overview"},
+            {"method": "GET", "path": "/health", "description": "API health"},
+            {"method": "GET", "path": "/chargers", "description": "Current charger statuses"},
+            {"method": "GET", "path": "/chargers/{qr_code}/history", "description": "Charger status history"},
+            {"method": "POST", "path": "/reload", "description": "Reload configuration"},
+            {"method": "GET", "path": "/docs", "description": "Interactive API documentation"},
+        ],
+    }
+
+
 @app.get("/health")
 def health():
     return {"status": "ok", "configuredChargers": len(config["chargers"])}
