@@ -100,10 +100,17 @@ jobs:
         shell: bash
         run: |
           port="${DEPLOY_PORT:-22}"
+          if [[ ! "$port" =~ ^[0-9]+$ ]] || (( port < 1 || port > 65535 )); then
+            echo "DEPLOY_PORT must be a TCP port from 1 to 65535" >&2
+            exit 1
+          fi
           ssh_opts=(-i "$RUNNER_TEMP/ssh/id_ed25519" -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o "UserKnownHostsFile=$RUNNER_TEMP/ssh/known_hosts")
           remote="$DEPLOY_USER@$DEPLOY_HOST"
-          ssh "${ssh_opts[@]}" -p "$port" "$remote" "test -f '$DEPLOY_PATH/config.json' && test -f '$DEPLOY_PATH/.env'"
-          scp "${ssh_opts[@]}" -P "$port" docker-compose.yml "$remote:$DEPLOY_PATH/docker-compose.yml"
+          ssh "${ssh_opts[@]}" -p "$port" "$remote" "test -d '$DEPLOY_PATH' && test -f '$DEPLOY_PATH/.env'" || {
+            echo "DEPLOY_PATH must exist on the VPS and contain a private .env file" >&2
+            exit 1
+          }
+          scp "${ssh_opts[@]}" -P "$port" docker-compose.yml config.json "$remote:$DEPLOY_PATH/"
           if [ -n "$GHCR_READ_TOKEN" ]; then
             if [ -z "$GHCR_USERNAME" ]; then echo 'GHCR_USERNAME is required with GHCR_READ_TOKEN' >&2; exit 1; fi
             printf '%s\n' "$GHCR_READ_TOKEN" | ssh "${ssh_opts[@]}" -p "$port" "$remote" "docker login ghcr.io -u '$GHCR_USERNAME' --password-stdin"
