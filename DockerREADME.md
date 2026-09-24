@@ -4,19 +4,19 @@ On pull requests, GitHub Actions runs the unit tests. On pushes to `main`, it al
 
 ## VPS setup
 
-Create a private deployment directory, for example `/opt/evc-charger-status`, owned by the deploy user. Put `.env` with `EVC_API_KEY=...` there. The workflow uploads the tracked `config.json` with the charger list on each deployment. Optional `.env` entries are `EVC_DEVICE_ID`, `EVC_BASE_URL`, and `EVC_PORT` (default 8000). The private `.env` is ignored by Git and stays on the VPS. The workflow also uploads `docker-compose.yml`.
+Create a private deployment directory, for example `/srv/evc-charger-status-api`, owned by the deploy user. Put `.env` with `EVC_API_KEY=...` there. The workflow uploads the tracked `config.json` with the charger list on each deployment. Optional `.env` entries are `EVC_DEVICE_ID`, `EVC_BASE_URL`, and `EVC_PORT` (default 8001 on the VPS). The private `.env` is ignored by Git and stays on the VPS. The workflow also uploads `docker-compose.yml`.
 
 Before the first deploy, create the private environment file on the VPS:
 
 ```bash
-cd /opt/evc-charger-status
+cd /srv/evc-charger-status-api
 install -m 600 /dev/null .env
 # Edit .env and add EVC_API_KEY=your_actual_key
 ```
 
 Use your actual `DEPLOY_PATH` instead of the example path. The workflow stops with a clear error if this file or the deployment directory is missing.
 
-The API binds to `127.0.0.1:EVC_PORT` on the VPS, for use behind an existing reverse proxy. SQLite history is stored in the named Docker volume `evc-status-data` and survives container replacement. Keep one deployment of this app per VPS unless you give each stack a separate Compose project name and port.
+The API binds to `127.0.0.1:EVC_PORT` on the VPS (default `127.0.0.1:8001`) and still listens on port 8000 inside the container, for use behind an existing reverse proxy. SQLite history is stored in the named Docker volume `evc-status-data` and survives container replacement. Keep one deployment of this app per VPS unless you give each stack a separate Compose project name and port.
 
 ## GitHub Actions secrets
 
@@ -29,7 +29,7 @@ After the first deployment, check from the deployment directory:
 ```bash
 docker compose ps
 docker compose logs --tail=100
-curl -fsS http://127.0.0.1:8000/health
+curl -fsS http://127.0.0.1:8001/health
 ```
 
-Use your configured `EVC_PORT` if different. `/health` confirms the API runs; it does not contact EVC-net.
+If `.env` already sets `EVC_PORT=8000`, change that value to an unused host port such as 8001; it overrides the Compose default. Use your configured `EVC_PORT` in the curl command if different. `/health` confirms the API runs; it does not contact EVC-net.

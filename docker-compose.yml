@@ -6,7 +6,7 @@ services:
     environment:
       STATUS_DB_PATH: /data/status.sqlite3
     ports:
-      - "127.0.0.1:${EVC_PORT:-8000}:8000"
+      - "127.0.0.1:${EVC_PORT:-8001}:8000"
     volumes:
       - ./config.json:/app/config.json:ro
       - evc-status-data:/data
