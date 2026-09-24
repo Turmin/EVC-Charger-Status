@@ -1,0 +1,13 @@
+.git
+.github
+.venv
+.env
+*.sqlite3*
+*.json
+__pycache__
+.pytest_cache
+.codex
+.agents
+tests
+DockerREADME.md
+README.md

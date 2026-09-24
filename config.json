@@ -1,0 +1,26 @@
+{
+  "poll_interval_seconds": 300,
+  "chargers": [
+    {
+      "qr_code": "18B03383",
+      "name": "Kaak",
+      "description": "Laadpaal bij hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03351",
+      "name": "Kaak",
+      "description": "Gasten Laadpaal bij hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B02944",
+      "name": "Kaak",
+      "description": "Gasten Laadpaal bij hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    }
+  ]
+}
