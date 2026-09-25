@@ -1,5 +1,11 @@
 {
-  "poll_interval_seconds": 300,
+  "polling_schedule": [
+    {"start_hour": 0, "interval_seconds": 3600},
+    {"start_hour": 7, "interval_seconds": 300},
+    {"start_hour": 10, "interval_seconds": 900},
+    {"start_hour": 18, "interval_seconds": 3600}
+  ],
+  "weekend_interval_seconds": 3600,
   "chargers": [
     {
       "qr_code": "18B03383",
