@@ -91,6 +91,20 @@
       "description": "Hoofdingang",
       "latitude": 51.919923,
       "longitude": 6.370624
+    },
+    {
+      "qr_code": "07000362",
+      "name": "Laadpaal gevel 1",
+      "description": "Gevel zijkant",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "03011419",
+      "name": "Laadpaal gevel 2",
+      "description": "Gevel zijkant",
+      "latitude": 51.919923,
+      "longitude": 6.370624
     }
   ]
 }
