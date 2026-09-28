@@ -8,23 +8,87 @@
   "weekend_interval_seconds": 3600,
   "chargers": [
     {
-      "qr_code": "18B03383",
-      "name": "Kaak",
-      "description": "Laadpaal bij hoofdingang",
+      "qr_code": "09140546",
+      "name": "Laadpaal 1",
+      "description": "Gasten - Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03425",
+      "name": "Laadpaal 2",
+      "description": "Gasten - Hoofdingang",
       "latitude": 51.919923,
       "longitude": 6.370624
     },
     {
       "qr_code": "18B03351",
-      "name": "Kaak",
-      "description": "Gasten Laadpaal bij hoofdingang",
+      "name": "Laadpaal 3",
+      "description": "Gasten - Hoofdingang",
       "latitude": 51.919923,
       "longitude": 6.370624
     },
     {
       "qr_code": "18B02944",
-      "name": "Kaak",
-      "description": "Gasten Laadpaal bij hoofdingang",
+      "name": "Laadpaal 4",
+      "description": "Gasten - Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03356",
+      "name": "Laadpaal 5",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+
+    {
+      "qr_code": "18B03383",
+      "name": "Laadpaal 6",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03417",
+      "name": "Laadpaal 7",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03352",
+      "name": "Laadpaal 8",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03348",
+      "name": "Laadpaal 9",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03480",
+      "name": "Laadpaal 10",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03481",
+      "name": "Laadpaal 11",
+      "description": "Hoofdingang",
+      "latitude": 51.919923,
+      "longitude": 6.370624
+    },
+    {
+      "qr_code": "18B03374",
+      "name": "Laadpaal 12",
+      "description": "Hoofdingang",
       "latitude": 51.919923,
       "longitude": 6.370624
     }
